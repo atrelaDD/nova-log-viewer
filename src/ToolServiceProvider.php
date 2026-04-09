@@ -31,6 +31,7 @@ class ToolServiceProvider extends ServiceProvider
                 "Stop polling" => "Stop polling",
                 "Scroll to top" => "Scroll to top",
                 "Scroll to bottom" => "Scroll to bottom",
+                "Download log" => "Download log",
                 ":number lines" => ":number lines",
                 ":number line" => ":number line"
             ]);

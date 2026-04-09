@@ -15,3 +15,4 @@ use Laravel\Nova\LogViewer\Http\Controllers\Pages\LogViewerController;
 */
 
 Route::get('/', [LogViewerController::class, 'fetch']);
+Route::get('/download', [LogViewerController::class, 'download']);

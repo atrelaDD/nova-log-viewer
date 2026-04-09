@@ -54,6 +54,12 @@
             type="arrow-down"
             v-tooltip="__('Scroll to bottom')"
           />
+
+          <ToolbarButton
+            @click="downloadLog"
+            type="download"
+            v-tooltip="__('Download log')"
+          />
         </div>
       </div>
     </div>
@@ -200,6 +206,11 @@ export default {
         const scrollInfo = this.codemirror.getScrollInfo()
         this.codemirror.scrollTo(0, scrollInfo.height)
       })
+    },
+
+    downloadLog() {
+      const params = new URLSearchParams({ log: this.selectedLogFile.value })
+      window.location.href = '/nova-vendor/logs/download?' + params.toString()
     },
 
     setupInterval() {

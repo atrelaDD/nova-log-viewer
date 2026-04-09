@@ -53,4 +53,28 @@ class LogViewerController extends Controller
             'numberOfLines' => $logFile->numberOfLines(),
         ]);
     }
+
+    /**
+     * Download the given log file as .txt.
+     *
+     * @param  \Laravel\Nova\Http\Requests\NovaRequest  $request
+     * @return \Symfony\Component\HttpFoundation\BinaryFileResponse
+     */
+    public function download(NovaRequest $request)
+    {
+        $request->validate(['log' => ['required', 'string']]);
+
+        $path = storage_path('logs/' . $request->log);
+
+        abort_unless(
+            FileFacade::exists($path) && str_ends_with($request->log, '.log'),
+            404
+        );
+
+        $downloadName = pathinfo($request->log, PATHINFO_FILENAME) . '.txt';
+
+        return response()->download($path, $downloadName, [
+            'Content-Type' => 'text/plain',
+        ]);
+    }
 }
